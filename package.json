@@ -1,0 +1,24 @@
+{
+  "name": "ProyectoFinal_DesarrolloWeb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jcarlos0828/ProyectoFinal_DesarrolloWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jcarlos0828/ProyectoFinal_DesarrolloWeb/issues"
+  },
+  "homepage": "https://github.com/Jcarlos0828/ProyectoFinal_DesarrolloWeb#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
