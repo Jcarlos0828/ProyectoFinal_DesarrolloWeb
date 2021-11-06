@@ -10,5 +10,5 @@
 Required to run the following commands for a correct installation and general setup of this project:
 
 `npm i -y`  
-`npm i express`  
-`npm i mongoose`
+`npm i express mongoose dotenv`  
+`npm i ejs` (hay que correr como administrador)

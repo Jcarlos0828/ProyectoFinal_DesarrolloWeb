@@ -1,0 +1,37 @@
+<%- include ("./templates/_header") %>
+
+<p class="text-center"> Seleccione la categoría de quizz que más le interese</p>
+<div class="container">
+
+<div class = "col-md">
+
+<div class="col-md-5">
+   <div class="card">
+     <div class="card-body">
+      <!-- A partir de aqui hace funcionar el boton-->
+      <form action="/add" method="post">
+       <button class="btn btn-primary" type="submit">
+       Ciencias
+       </button>
+      </form>
+     </div>
+   </div>
+   <div class="card">
+    <div class="card-body">
+     <!-- A partir de aqui hace funcionar el boton-->
+     <form action="/add" method="post">
+       <button class="btn btn-primary" type="submit">
+       Cuerpo humano
+       </button>
+     </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<%- include ("./templates/_footer") %>
