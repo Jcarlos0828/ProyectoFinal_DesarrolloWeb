@@ -48,6 +48,37 @@ const UserList = {
 		.catch(err => {
 			throw Error(err);
 		});
+	},
+	signup: async (email, password, name) => {
+		return User.findOne({ email })
+		.then(async user => {
+			let result = {};
+			
+			if (user == undefined) {
+				let newUser = { email, password, name };
+				await User.create(newUser)
+					.then(user => {
+						result['message'] = 'Usuario registrado exitosamente';
+						result['status'] = 201;
+						result['data'] = newUser
+						result['error'] = false;
+					})
+					.catch(err => {
+						result['message'] = 'Error DB';
+						result['status'] = 500;
+						result['error'] = true;
+						throw Error(err);
+					});
+			} else {
+				result['message'] = 'Correo ya existente';
+				result['status'] = 408;
+				result['error'] = true;
+			}
+			return result;
+		})
+		.catch(err => {
+			throw Error(err);
+		});
 	}
 }
 

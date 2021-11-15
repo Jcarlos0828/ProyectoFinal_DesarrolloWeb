@@ -1,7 +1,7 @@
-var express = require("express");
-var morgan = require("morgan");
-var mongoose = require('mongoose');
-var dotenv = require("dotenv");
+const express = require("express");
+const morgan = require("morgan");
+const mongoose = require('mongoose');
+const dotenv = require("dotenv");
 
 dotenv.config()
 
@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGODB_HOST, {
 .then(() => console.log("MongoDB database connected successfully"))
 .catch(console.log);
 
-var app = express();
+const app = express();
 
 // Middlewares
 app.use(morgan('dev'));
