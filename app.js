@@ -16,9 +16,13 @@ app.use(express.json());
 
 // importing routes
 const userRoutes = require('./routes/userRoutes');
+const quizzesRoutes = require('./routes/quizzesRoutes');
+const flashcardsRoutes = require('./routes/flashcardsRoutes');
 
 // Routes
 app.use('/', userRoutes);
+app.use('/quizzes', quizzesRoutes);
+app.use('/flash-cards', flashcardsRoutes);
 
 app.listen(process.env.PORT,() =>{
     console.log(`Server running on port  ${process.env.PORT}`);

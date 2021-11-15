@@ -8,7 +8,7 @@
       <div class="card">
         <div class="card-body">
           <!-- A partir de aqui hace funcionar el boton-->
-          <form action="/add" method="post">
+          <form action="/add/<%= usuario.id %>" method="get">
             <button class="btn btn-primary" type="submit">
               Verbos
             </button>
@@ -20,7 +20,7 @@
           <!-- A partir de aqui hace funcionar el boton-->
           <form action="/add" method="post">
             <button class="btn btn-primary" type="submit">
-            Elementos del hogar
+              Elementos del hogar
             </button>
           </form>
         </div>
