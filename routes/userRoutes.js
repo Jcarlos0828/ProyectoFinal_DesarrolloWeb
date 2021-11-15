@@ -8,7 +8,7 @@ router.get('/', async function(req,res){
 });
 
 router.get('/login', async function(req, res){
-    UserList.login('', '')
+    UserList.login('A', 'a')
     .then(result => {
         const {data, message, status, error} = result;
         res.statusMessage = message;
@@ -22,6 +22,7 @@ router.get('/login', async function(req, res){
         }
     })
     .catch(err => {
+        console.log('Login', err);
         res.statusMessage = 'Hubo un error con la base de datos';
         return res.status(500).json({
             message: res.statusMessage,

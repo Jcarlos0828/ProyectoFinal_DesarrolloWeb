@@ -23,6 +23,7 @@ const UserList = {
 	login: (email, password) => {
 		return User.findOne({ email })
 		.then(user => {
+			let result = {};
 			if (user != undefined) {
 				if (user.password == password) {
 					result['message'] = 'Inicio de sesión exitosa';
