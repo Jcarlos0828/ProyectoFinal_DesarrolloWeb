@@ -1,32 +1,30 @@
 <%- include ("./templates/_header") %>
 
-<p class="text-center"> Seleccione la categoría de flash cards que más le interese</p>
+<p class="text-center"> Seleccione su manera preferida de aprender </p>
 <div class="container">
   <div class = "col-md">
-
     <div class="col-md-5">
       <div class="card">
         <div class="card-body">
           <!-- A partir de aqui hace funcionar el boton-->
-          <form action="/add" method="post">
+          <form action="/quizzes" method="get">
             <button class="btn btn-primary" type="submit">
-              Verbos
+              Quizzes
             </button>
           </form>
         </div>
       </div>
       <div class="card">
         <div class="card-body">
-          <!-- A partir de aqui hace funcionar el boton-->
-          <form action="/add" method="post">
+        <!-- A partir de aqui hace funcionar el boton-->
+          <form action="/flash-cards" method="get">
             <button class="btn btn-primary" type="submit">
-            Elementos del hogar
+            Flash Cards
             </button>
           </form>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
