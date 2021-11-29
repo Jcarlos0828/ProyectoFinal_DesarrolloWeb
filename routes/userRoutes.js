@@ -3,8 +3,11 @@ const router = Router();
 
 const { UserList } = require('./../models/userModel');
 
-router.get('/', async function(req,res){
-    res.render('landingPage', { dataErr: '' });
+router.get('/', async function (req, res) {
+    function printShido() {
+        console.log("Jesse No MAMES!!");
+    }
+    res.render('landingPage', { dataErr: '', printShido });
 });
 
 router.post('/login', async function(req, res){

@@ -5,7 +5,14 @@ mongoose.Promise = global.Promise;
 const userSchema = mongoose.Schema({
 	name: 			{type: String, require: true},
 	email: 			{type: String, require: true},
-	password: 	{type: String, require: true}
+	password: 	{type: String, require: true},
+	quizes: {
+		type: [{
+			quiz_id: String,
+			respuestas: [Number]
+		}],
+		require: true
+	}
 });
 
 const User = mongoose.model('User', userSchema);
