@@ -2,17 +2,18 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+const answersSchema = mongoose.Schema({
+	quiz_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+	respuestas: { type: [Number], required: true }
+});
+
 const userSchema = mongoose.Schema({
-	name: 			{type: String, require: true},
-	email: 			{type: String, require: true},
-	password: 	{type: String, require: true},
-	quizes: {
-		type: [{
-			quiz_id: String,
-			respuestas: [Number]
-		}],
-		require: true
-	}
+	name: 			{ type: String, require: true },
+	email: 			{ type: String, require: true },
+	password: 	{ type: String, require: true },
+	quizzes: 		{ type: [answersSchema], require: true }
+	// quizes: 		{ type: [mongoose.Schema.Types.Mixed], require: true }
+	
 });
 
 const User = mongoose.model('User', userSchema);
@@ -22,6 +23,32 @@ const UserList = {
 		return User.find()
 			.then(users => {
 				return users;
+			})
+			.catch(err => {
+				throw Error(err);
+			});
+	},
+	getUser: (id) => {
+		return User.findOne({ _id: id })
+			.then(user => {
+				return user;
+			})
+			.catch(err => {
+				throw Error(err);
+			});
+	},
+	updateAnswers: async (email, quizID, indiceRespuesta, respuesta) => {
+		console.log('email', email);
+		return User.findOne({ email })
+			.then(async user => {
+				user.quizzes.forEach(quiz => {
+					if (quiz.quiz_id == quizID) {
+						quiz.respuestas[indiceRespuesta] = respuesta;
+					}
+				});
+				console.log('antes del user.save()')
+				await user.save();
+				return user;
 			})
 			.catch(err => {
 				throw Error(err);

@@ -1,37 +1,74 @@
 const { Router } = require('express');
 const router = Router();
 
-const { Quiz } = require('./../models/quizzModel');
-
-router.get('/', async function(req,res){
-  res.render('quizzes');
-});
+const { QuizList } = require('./../models/quizzModel');
+const { UserList } = require('./../models/userModel');
 
 router.get('/', async function(req,res) {
-  const quizes = Quiz.find({});
-  res.render('quizzes', { quizes });
+  QuizList.getQuizzes()
+  .then(quizzes => {
+    res.render('quizzes', { quizzes });
+  })
+  .catch(err => {
+    res.statusMessage = 'Hubo un error con la base de datos';
+    res.status(500);
+    let dataErr = {
+      message: res.statusMessage,
+      status: 500
+    };
+    res.status(200).render('landingPage', { dataErr });
+  });
 });
 
-router.get('/:pregunta_id/:user_id/:indice_pregunta', async function(req,res) {
-  const { pregunta_id, user_id, pregunta } = req.params;
-  const quiz = await Quiz.find({ _id: pregunta_id });
-  res.render('quiz', { quiz, pregunta_id, user_id, pregunta });
+router.get('/:quiz_id/:pregunta', function(req,res) {
+  const { quiz_id, pregunta } = req.params;
+  QuizList.getQuiz(quiz_id)
+  .then(quiz => {
+    res.status(200).render('quiz', { quiz, pregunta });
+  })
+  .catch(err => {
+    res.statusMessage = 'Hubo un error con la base de datos';
+    res.status(500);
+    let dataErr = {
+      message: res.statusMessage,
+      status: 500
+    };
+    res.render('landingPage', { dataErr });
+  });
 });
 
-router.post('/registrar_respuesta', async function(req,res) {
-  const { pregunta_id, user_id, indice_pregunta, respuesta } = req.params;
-  const usuario = await User.find({ _id: user_id });
-  const quiz = await Quiz.find({ _id: pregunta_id });
-  const quizUsuario = usuario.quizes.find(q => q.quiz_id === pregunta_id);
-  quizUsuario[indice_pregunta] = respuesta;
-  await usuario.save();
+router.post('/registrar_respuesta', function(req, res) {
+  const { email, quiz_id, indice_pregunta, respuesta } = req.body;
+  UserList.updateAnswers(email, quiz_id, indice_pregunta, respuesta)
+  .then(user => {
+    QuizList.getQuiz(quiz_id)
+    .then(quiz => {
+      // res.status(200).render('quiz', { quiz, indice_pregunta });
+      res.status(200).redirect(`/quizzes/${quiz_id}/${indice_pregunta + 1}`, { email });
+    })
+    .catch(err => {
+      console.log('registrar_respuesta: error en el quiz')
+      res.statusMessage = 'Hubo un error con la base de datos';
+      res.status(500);
+      let dataErr = {
+        message: res.statusMessage,
+        status: 500
+      };
+      res.render('aprendizaje', { dataErr });
+    });
+  })
+  .catch(err => {
+    console.log('registrar_respuesta: error en el usuario', err);
+    res.statusMessage = 'Hubo un error con la base de datos';
+    res.status(500);
+    let dataErr = {
+      message: res.statusMessage,
+      status: 500
+    };
+    res.render('aprendizaje', { dataErr });
+  });
 
-  if (indice_pregunta + 1 === quiz.preguntas.length) {
-    res.redirect('resultados');
-    return;
-  }
-
-  res.redirect(`quiz/${pregunta_id}/${user_id}/${indice_pregunta + 1}`);
+  
 });
 
 // GET     /    Mostrar todos
