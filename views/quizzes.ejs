@@ -1,22 +1,51 @@
 <%- include ("./templates/_header") %>
-
-<p class="text-center"> Seleccione la categoría de quizz que más le interese</p>
+<h1 class="text-center">Quizzes</h1>
+<p class="text-center"> Selecciona la categoría sobre la que quieres aprender hoy</p>
 <div class="container">
   <div class = "col-md">
-    <div class="col-md-5">
-      <% quizzes.forEach(quiz => {%>
-        <div class="card">
-          <div class="card-body">
-          <a href="/quizzes/preguntas/<%= quiz._id %>/0?user=<%= user %>">
-            <button class="btn btn-primary" type="submit">
-              <%= quiz.titulo %>
-            </button>
-          </a>
-          </div>
-        </div>
-      <% }); %>
-    </div>
+    <% quizzes.forEach(quiz => {%>
+      <a href="/quizzes/preguntas/<%= quiz._id %>/0?user=<%= user %>">
+        <button class="btn btn-primary" type="submit">
+          <%= quiz.titulo %>
+        </button>
+      </a>
+    <% }); %>
   </div>
 </div>
 
 <%- include ("./templates/_footer") %>
+
+<style>
+  h1, p{
+    padding: 10px;
+    text-align: center;
+  }
+
+  .row{
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-md {
+    display: flex;
+    justify-content:center;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .col-md button{ 
+    height: 200px;
+    width: 300px;
+    margin: 20px;
+    padding: 30px;
+    align-items: center;
+    font-size: 50px;
+    background-color: #DBB1BC;
+    border-color: #DBB1BC;
+  }
+
+  .col-md a:hover button {
+    background-color: #b39099;
+    border-color: #b39099;
+  }
+</style>
