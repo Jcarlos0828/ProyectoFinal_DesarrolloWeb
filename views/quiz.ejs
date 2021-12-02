@@ -7,6 +7,43 @@
         <h2 class="text-center"> <%= pregunta.titulo %> </h2>
       </div>
       <div id="form-actualizar-respuesta" class="card-body">
+        <% if (respuesta && !isLast) { %>
+        <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
+          <% pregunta.opciones.forEach((opcion, index) => {%>
+            <% if(respuestaUser !== respuesta && respuestaUser === index) { %>
+            <button class="btn btn-danger" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } else if(index === respuesta) { %>
+            <button class="btn btn-success" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } else{ %>
+            <button class="btn btn-primary respuesta" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } %>
+          <% }); %>
+        </form>
+        <% } else if(respuesta && isLast){%>
+        <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
+          <% pregunta.opciones.forEach((opcion, index) => {%>
+            <% if(respuestaUser !== respuesta && respuestaUser === index) { %>
+            <button class="btn btn-danger" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } else if(index === respuesta) { %>
+            <button class="btn btn-success" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } else{ %>
+            <button class="btn btn-primary respuesta" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+            <% } %>
+          <% }); %>
+        </form>
+        <% } else { %>
         <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
           <% pregunta.opciones.forEach((opcion, index) => {%>
             <button class="btn btn-primary respuesta" type="submit" name="respuesta" value="<%= index %>">
@@ -14,6 +51,7 @@
             </button>
           <% }); %>
         </form>
+        <% } %>
         <% if (respuesta && !isLast) { %>
         <a href="/quizzes/preguntas/<%= quiz._id %>/<%= preguntaIdx + 1 %>?user=<%= user %>">
         <button class="btn btn-primary">
