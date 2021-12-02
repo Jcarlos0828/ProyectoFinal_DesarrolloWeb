@@ -1,41 +1,62 @@
 <%- include ("./templates/_header") %>
 
-<p class="text-center"> Seleccione su manera preferida de aprender </p>
+<h1 class="text-center"> ¡Vamos a aprender! </h1>
+<p class="text-center"> Entra al área de quizzes y practica o ve tu historial de resultados </p>
 <div class="container">
   <div class = "col-md">
-    <div class="col-md-5">
-      <div class="card">
-        <div class="card-body">
-          <!-- A partir de aqui hace funcionar el boton-->
-          <a href="/quizzes?user=<%= data.email %>">
-            <button class="btn btn-primary" type="submit">
-              Quizzes
-            </button>
-          </a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-        <!-- A partir de aqui hace funcionar el boton-->
-          <form action="/flash-cards" method="get">
-            <button class="btn btn-primary" type="submit">
-            Flash Cards
-            </button>
-          </form>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <!-- A partir de aqui hace funcionar el boton-->
-          <a href="/users/<%= data.email %>">
-            <button class="btn btn-primary" type="submit">
-              Resultados previos
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+      <!-- A partir de aqui hace funcionar el boton-->
+      <a href="/quizzes?user=<%= data.email %>">
+        <button id="quiz" class="btn btn-primary" type="submit">
+          Quizzes
+        </button>
+      </a>
+  
+      <!-- A partir de aqui hace funcionar el boton-->
+      <a href="/users/<%= data.email %>">
+        <button id="results" class="btn btn-primary" type="submit">
+          Resultados previos
+        </button>
+      </a>
   </div>
 </div>
 
 <%- include ("./templates/_footer") %>
+
+<style>
+  h1, h3{
+    padding: 10px;
+    text-align: center;
+  }
+
+  .row{
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-md {
+    display: flex;
+    justify-content:center;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .col-md button{ 
+    height: 200px;
+    width: 300px;
+    margin: 20px;
+    padding: 30px;
+    align-items: center;
+    font-size: 50px;
+  }
+
+  #quiz{
+    background-color: #DBB1BC;
+    border-color: #DBB1BC;
+  }
+
+  #results{
+    background-color: #B8ABC4;
+    border-color: #B8ABC4;
+  }
+  
+</style>
