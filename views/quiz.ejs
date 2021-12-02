@@ -1,33 +1,40 @@
 <%- include ("./templates/_header") %>
-
 <p class="text-center"> <%= quiz.titulo %> </p>
 <div class="container">
   <div class = "col-md">
     <div class="card">
       <div class="card-body">
-        <h2 class="text-center"> <%= quiz.preguntas[0].titulo %> </h2>
-        <% quiz.preguntas[0].opciones.forEach((opcion, index) => {%>
-          <button class="btn btn-primary respuesta" type="submit" value="<%= index %>">
-            <%= opcion %>
-          </button>
-        <% }); %>
+        <h2 class="text-center"> <%= pregunta.titulo %> </h2>
       </div>
-      <div id="form-actualizar-respuesta" class="card-body d-none">
-        <form action="/quizzes/registrar_respuesta" method="post">
-          <button class="btn btn-primary" type="submit">
-            Siguiente pregunta
-          </button>
-          <!-- <input name="email" id="email" class="d-none" value="<%= email %>"/> -->
-          <input name="quiz_id" id="quiz_id" class="d-none" value="<%= quiz.id %>"/>
-          <input name="indice_pregunta" id="indice_pregunta" class="d-none" value="<%= pregunta %>"/>
-          <input name="respuesta" id="respuesta" class="d-none" value="-1"/>
+      <div id="form-actualizar-respuesta" class="card-body">
+        <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
+          <% pregunta.opciones.forEach((opcion, index) => {%>
+            <button class="btn btn-primary respuesta" type="submit" name="respuesta" value="<%= index %>">
+              <%= opcion %>
+            </button>
+          <% }); %>
         </form>
+        <% if (respuesta && !isLast) { %>
+        <a href="/quizzes/preguntas/<%= quiz._id %>/<%= preguntaIdx + 1 %>?user=<%= user %>">
+        <button class="btn btn-primary">
+          Siguiente pregunta
+        </button>
+        </a>
+        <% } %>
+        <% if (isLast) { %>
+        <a href="/quizzes/resultados/<%= quiz._id %>?user=<%= user %>">
+        <button class="btn btn-primary">
+          Finalizar examen
+        </button>
+        </a>
+        <% } %>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+/*
   document.querySelectorAll('.respuesta').forEach(respuesta => {
     respuesta.addEventListener('click', (e) => {
       e.preventDefault();
@@ -36,6 +43,7 @@
       document.querySelector('#respuesta').value = e.target.value;
     });
   });
+*/
 </script>
 
 <%- include ("./templates/_footer") %>

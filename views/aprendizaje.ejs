@@ -7,11 +7,11 @@
       <div class="card">
         <div class="card-body">
           <!-- A partir de aqui hace funcionar el boton-->
-          <form action="/quizzes" method="get">
+          <a href="/quizzes?user=<%= data.email %>">
             <button class="btn btn-primary" type="submit">
               Quizzes
             </button>
-          </form>
+          </a>
         </div>
       </div>
       <div class="card">

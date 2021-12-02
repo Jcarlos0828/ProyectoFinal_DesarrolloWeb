@@ -1,18 +1,17 @@
 <%- include ("./templates/_header") %>
 
 <p class="text-center"> Seleccione la categoría de quizz que más le interese</p>
-<!-- <p class="text-center"> <%= email %> </p> -->
 <div class="container">
   <div class = "col-md">
     <div class="col-md-5">
       <% quizzes.forEach(quiz => {%>
         <div class="card">
           <div class="card-body">
-          <form action="/quizzes/<%= quiz._id %>/0" method="get">
+          <a href="/quizzes/preguntas/<%= quiz._id %>/0?user=<%= user %>">
             <button class="btn btn-primary" type="submit">
               <%= quiz.titulo %>
             </button>
-          </form>
+          </a>
           </div>
         </div>
       <% }); %>

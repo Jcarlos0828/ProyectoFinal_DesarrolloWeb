@@ -2,12 +2,57 @@ const { Router } = require('express');
 const router = Router();
 
 const { UserList } = require('./../models/userModel');
+const { QuizList } = require('./../models/quizzModel');
 
 router.get('/', async function (req, res) {
     function printShido() {
         console.log("Jesse No MAMES!!");
     }
     res.render('landingPage', { dataErr: '', printShido });
+});
+
+router.get('/users/:email', async function (req, res) {
+  const { email } = req.params;
+    const user = await UserList.getUserWithEmail(email);
+    if (user instanceof Error) { 
+        res.statusMessage = 'Hubo un error con la base de datos';
+        res.status(500);
+        let dataErr = {
+        message: res.statusMessage,
+        status: 500
+        };
+        return res.render('landingPage', { dataErr });
+    }
+    
+    const quizzesModel = await QuizList.getQuizzes();
+    if (quizzesModel instanceof Error) { 
+        res.statusMessage = 'Hubo un error con la base de datos';
+        res.status(500);
+        let dataErr = {
+        message: res.statusMessage,
+        status: 500
+        };
+        return res.render('landingPage', { dataErr });
+    }
+
+    console.log(quizzesModel);
+
+    const quizzes = [];
+    for (const [quiz_id, respuestasUsuario] of Object.entries(user.quizzes)) {
+        const quizModel = quizzesModel.find(q => q._id === quiz_id);
+        const respuestasCorrectas = quizModel.respuestas;
+        let puntaje = respuestasUsuario.forEach((rU, idx) => {
+            if (respuestasCorrectas[idx] === rU) puntaje += 1;
+        });
+        puntaje = (puntaje / respuestasCorrectas.length) * 100;
+        quizzes.push({
+            titulo: quizModel.titulo,
+            puntaje,
+            maximo: respuestasCorrectas.length
+        })
+    }
+
+    res.render('userQuizzes', { user, quizzes });
 });
 
 router.post('/login', async function(req, res){

@@ -1,0 +1,20 @@
+<%- include ("./templates/_header") %>
+
+<p class="text-center"> Resultados de los exámenes para: </p>
+<p class="text-center"> <%= user.name %> </p>
+<div class="container">
+  <div class = "col-md">
+    <div class="col-md-5">}
+      <% quizzes.forEach((q) => { %>
+        <div class="card">
+          <div class="card-body">
+              <p><%= q.titulo %></p>
+              <p><span><%= q.puntaje %></span>/ 100</p>
+          </div>
+          <button>Borrar examen</button>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</div>
+<%- include ("./templates/_footer") %>

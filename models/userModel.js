@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
 	name: 			{ type: String, require: true },
 	email: 			{ type: String, require: true },
 	password: 	{ type: String, require: true },
-	quizzes: 		{ type: [answersSchema], require: true }
+	quizzes: 		{ type: Map, of: Array, default: {}, require: true }
 	// quizes: 		{ type: [mongoose.Schema.Types.Mixed], require: true }
 	
 });
@@ -37,16 +37,33 @@ const UserList = {
 				throw Error(err);
 			});
 	},
+	getUserWithEmail: (email) => {
+		return User.findOne({ email })
+			.then(user => {
+				return user;
+			})
+			.catch(err => {
+				throw Error(err);
+			});
+	},
 	updateAnswers: async (email, quizID, indiceRespuesta, respuesta) => {
-		console.log('email', email);
 		return User.findOne({ email })
 			.then(async user => {
-				user.quizzes.forEach(quiz => {
-					if (quiz.quiz_id == quizID) {
-						quiz.respuestas[indiceRespuesta] = respuesta;
+				const prevAnswers = user.quizzes.get(quizID);
+				if (!prevAnswers) {
+					user.quizzes.set(quizID, [respuesta])
+				} else {
+					// Sobreescribiendo la respuesta
+					if (prevAnswers.length > indiceRespuesta) {
+						prevAnswers[indiceRespuesta] = respuesta;
 					}
-				});
-				console.log('antes del user.save()')
+					// Agregando una respuesta nueva
+					else { 
+						prevAnswers.push(respuesta);
+					}
+					user.quizzes.set(quizID, prevAnswers);
+				}
+				console.log('antes del user.save()');
 				await user.save();
 				return user;
 			})
