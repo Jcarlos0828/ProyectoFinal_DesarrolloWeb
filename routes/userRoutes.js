@@ -35,13 +35,13 @@ router.get('/users/:email', async function (req, res) {
         return res.render('landingPage', { dataErr });
     }
 
-    console.log(quizzesModel);
-
     const quizzes = [];
-    for (const [quiz_id, respuestasUsuario] of Object.entries(user.quizzes)) {
-        const quizModel = quizzesModel.find(q => q._id === quiz_id);
-        const respuestasCorrectas = quizModel.respuestas;
-        let puntaje = respuestasUsuario.forEach((rU, idx) => {
+    for (let [quiz_id, respuestasUsuario] of user.quizzes) {
+        const quizModel = quizzesModel.find(q => q._id.toString() === quiz_id);
+        if (!quizModel) continue;
+        const respuestasCorrectas = quizModel.preguntas.map(p => p.opcionCorrecta);
+        let puntaje = 0;
+        respuestasUsuario.forEach((rU, idx) => {
             if (respuestasCorrectas[idx] === rU) puntaje += 1;
         });
         puntaje = (puntaje / respuestasCorrectas.length) * 100;
