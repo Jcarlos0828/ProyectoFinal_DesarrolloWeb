@@ -45,6 +45,7 @@ router.post('/registrar_respuesta', function (req, res) {
   const { email, quiz } = req.query;
   const preguntaIdx = Number(req.query.preguntaIdx);
   const respuestaUser = Number(req.body.respuesta);
+  console.log(respuestaUser)
   UserList.updateAnswers(email, quiz, preguntaIdx, respuestaUser)
   .then(user => {
     QuizList.getQuiz(quiz)
