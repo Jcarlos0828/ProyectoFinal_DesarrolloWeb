@@ -1,15 +1,32 @@
 <%- include ("./templates/_header") %>
 
-<p class="text-center"> Gracias por aprender, estos son tus resultados: </p>
+<h1 class="text-center">Resultados</h1>
+<p class="text-center"> ¡Gracias por aprender! </p>
 <div class="container">
   <div class = "col-md">
-    <div class="col-md-5">
       <div class="card">
         <div class="card-body">
-            <p><%= puntajeObtenido%> / 100</p>
+          <h3>Tu puntaje obtenido es:</h3>  
+          <h5><%= puntajeObtenido%> / 100</h5>
         </div>
       </div>
-    </div>
   </div>
 </div>
 <%- include ("./templates/_footer") %>
+
+<style>
+  h1, h3, h5{
+    padding: 10px;
+    text-align: center;
+  }
+
+  .col-md {
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-md .card{ 
+    background-color: #d9cae7;
+    border-color: #d9cae7;
+  }
+</style>

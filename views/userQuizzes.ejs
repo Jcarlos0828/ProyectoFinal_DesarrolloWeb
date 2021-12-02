@@ -1,20 +1,51 @@
 <%- include ("./templates/_header") %>
-
-<p class="text-center"> Resultados de los exámenes para: </p>
-<p class="text-center"> <%= user.name %> </p>
+<h1 class="text-center">Historial de resultados</h1>
+<br>
+<h5 class="text-center"> <%= user.name %>, a continuación te mostramos tu historial de resultados: </h5>
 <div class="container">
   <div class = "col-md">
-    <div class="col-md-5">
-      <% quizzes.forEach((q) => { %>
-        <div class="card">
-          <div class="card-body">
-              <p><%= q.titulo %></p>
-              <p><span><%= q.puntaje %></span>/ 100</p>
+    <% quizzes.forEach((q) => { %>
+      <div class="card">
+        <div class="card-body">
+          <h5><%= q.titulo %></h5>
+          <h3 class="text-center"><span><%= q.puntaje %></span>/ 100</h3>
+          <div id="button-delete">
+            <button class="btn btn-primary">
+              Borrar examen
+            </button>
           </div>
-          <button>Borrar examen</button>
         </div>
-      <% }); %>
-    </div>
+      </div>
+    <% }); %>
   </div>
 </div>
 <%- include ("./templates/_footer") %>
+
+<style>
+  h1, h3, h5{
+    padding: 10px;
+    text-align: center;
+  }
+
+  .card {
+    margin: 10px;
+  }
+  
+  .card #button-delete{
+    display: flex;
+    justify-content: center;
+  }
+
+  .col-md {
+    display: flex;
+    justify-content:center;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .col-md .card{ 
+    background-color: #d9cae7;
+    border-color: #d9cae7;
+  }
+
+</style>
