@@ -1,9 +1,9 @@
 # ProyectoFinal_DesarrolloWeb
 
-## Authors:
-### Mariafernananda Salas Martínez
-### Maria Renée Benavides Puente
-### José Carlos del Castillo Estrada
+## Authors
+Mariafernananda Salas Martínez  
+Maria Renée Benavides Puente  
+José Carlos del Castillo Estrada  
 
 ## Aprende Ingles
 Aprende ingles is a web platform that helps spanish native speakers to learn vocabulary in english by creating quizzes and having a record of all the activities and progress a user has made.
@@ -16,7 +16,7 @@ Required to run the following commands for a correct installation and general se
 `npm i express mongoose dotenv`  
 `npm i ejs`  (run it as admin)  
 
-To run the project locally, a `.env` file should be created with the following code to connect to localhost and to the database:
+To run the project locally, a `.env` file should be created with the following code to connect to localhost and to the database:  
 `PORT = 3000`  
 `MONGODB_HOST =  'mongodb://localhost/aprendiendo-ingles'`  
 
