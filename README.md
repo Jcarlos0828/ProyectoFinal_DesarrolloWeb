@@ -30,8 +30,8 @@ Required to run the following commands for seeding the project's database correc
 
 `db.quizzes.insert({preguntas:`  
                 `[{titulo: "Cuál es la forma correcta de escribir 'Naranja'",`  
-                `opciones: ["Orange","Oranje","Oruanch","Oranch"],`  
-                `opcionCorrecta: 0},`  
+                `opciones: ["Oranje","Orange","Oruanch","Oranch"],`  
+                `opcionCorrecta: 1},`  
                 `{titulo: "Cuál es la forma correcta de escribir 'Fresa'",`  
                 `opciones: ["Straubery","Strawberry","Strauberrie","Straberi"],`  
                 `opcionCorrecta: 1`  
@@ -45,14 +45,14 @@ Required to run the following commands for seeding the project's database correc
                 `opcionCorrecta: 3`  
                 `},`  
                 `{titulo: "Cuál es la forma correcta de escribir 'Manzana'",`  
-                `opciones: ["Apple","Apol","Aple","Apoul"],`  
-                `opcionCorrecta: 0`  
+                `opciones: ["Apol","Apple","Aple","Apoul"],`  
+                `opcionCorrecta: 1`  
                 `}],`  
             `titulo: "Vocabulario de frutas" } )`  
 `db.quizzes.insert({preguntas:`  
                 `[{titulo: "Cuál es la forma correcta de escribir 'Mano'",`  
-                `opciones: ["Hand","Hend","Han","Jan"],`  
-                `opcionCorrecta: 0},`  
+                `opciones: ["Hend","Hand","Han","Jan"],`  
+                `opcionCorrecta: 1},`  
                 `{titulo: "Cuál es la forma correcta de escribir 'Pie'",`  
                 `opciones: ["Fut","Foot","Fot","Fet"],`  
                 `opcionCorrecta: 1`  
@@ -66,7 +66,7 @@ Required to run the following commands for seeding the project's database correc
                 `opcionCorrecta: 3`  
                 `},`  
                 `{titulo: "Cuál es la forma correcta de escribir 'Nariz'",`  
-                `opciones: ["Nose","Nous","Nouse","Nois"],`  
-                `opcionCorrecta: 0`  
+                `opciones: ["Nous","Nose","Nouse","Nois"],`  
+                `opcionCorrecta: 1`  
                 `}],`  
             `titulo: "Vocabulario del cuerpo" } )`  
