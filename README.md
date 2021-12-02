@@ -5,15 +5,23 @@
 ### Maria Renée Benavides Puente
 ### José Carlos del Castillo Estrada
 
-# Proyect Setup
+## Aprende Ingles
+Aprende ingles is a web platform that helps spanish native speakers to learn vocabulary in english by creating quizzes and having a record of all the activities and progress a user has made.
+
+## Project Setup
 
 Required to run the following commands for a correct installation and general setup of this project:
 
 `npm i -y`  
 `npm i express mongoose dotenv`  
-`npm i ejs` (hay que correr como administrador)
+`npm i ejs`  (run it as admin)  
 
-# Database Setup
+To run the project locally, a `.env` file should be created with the following code to connect to localhost and to the database:
+`PORT = 3000`  
+`MONGODB_HOST =  'mongodb://localhost/aprendiendo-ingles'`  
+
+
+## Database Setup
 
 Required to run the following commands for seeding the project's database correctly:
 
