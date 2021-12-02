@@ -1,14 +1,18 @@
 <%- include ("./templates/_header") %>
-<p class="text-center"> <%= quiz.titulo %> </p>
+
+<h1 class="text-center"> <%= quiz.titulo %> </h1>
 <div class="container">
   <div class = "col-md">
     <div class="card">
-      <div class="card-body">
-        <h2 class="text-center"> <%= pregunta.titulo %> </h2>
+      <div id="question" class="card-body">
+        <h3 class="text-center"> <%= pregunta.titulo %> </h3>
       </div>
       <div id="form-actualizar-respuesta" class="card-body">
+        <div id="options">
+
         <% if (respuesta && !isLast) { %>
-        <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
+        
+          <form action="/quizzes/registrar_respuesta?quiz=<%= quiz._id %>&preguntaIdx=<%= preguntaIdx %>&email=<%= user %>" method="post">
           <% pregunta.opciones.forEach((opcion, index) => {%>
             <% if(respuestaUser !== respuesta && respuestaUser === index) { %>
             <button class="btn btn-danger" type="submit" name="respuesta" value="<%= index %>">
@@ -52,19 +56,24 @@
           <% }); %>
         </form>
         <% } %>
+        </div>
         <% if (respuesta && !isLast) { %>
-        <a href="/quizzes/preguntas/<%= quiz._id %>/<%= preguntaIdx + 1 %>?user=<%= user %>">
-        <button class="btn btn-primary">
-          Siguiente pregunta
-        </button>
-        </a>
+        <div id="next">
+          <a href="/quizzes/preguntas/<%= quiz._id %>/<%= preguntaIdx + 1 %>?user=<%= user %>">
+            <button id="next" class="btn btn-primary">
+              Siguiente
+            </button>
+            </a>
+        </div>
         <% } %>
         <% if (isLast) { %>
-        <a href="/quizzes/resultados/<%= quiz._id %>?user=<%= user %>">
-        <button class="btn btn-primary">
-          Finalizar examen
-        </button>
-        </a>
+        <div id="next">
+          <a href="/quizzes/resultados/<%= quiz._id %>?user=<%= user %>">
+            <button id="next" class="btn btn-primary">
+              Finalizar examen
+            </button>
+            </a>
+        </div>
         <% } %>
       </div>
     </div>
@@ -85,3 +94,34 @@
 </script>
 
 <%- include ("./templates/_footer") %>
+
+<style>
+  h1, h3{
+    padding: 10px;
+    text-align: center;
+  }
+
+  .card{
+    margin: 10px;
+  }
+
+  .card #question{
+    background-color: #e9cbd3;
+    border-color: #e9cbd3;
+  }
+  
+  .card #form-actualizar-respuesta #options{
+    display: flex;
+    justify-content: center;
+  }
+
+  .card #form-actualizar-respuesta #next{
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+  }
+
+  .card #form-actualizar-respuesta button{
+    margin: 5px;
+  }
+</style>
